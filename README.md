@@ -1,2 +1,2 @@
 # ProblemsAndSolutions
-A repository of the solved problems.
+A repository of solved problems.
