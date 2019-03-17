@@ -41,7 +41,7 @@ namespace PS
 		}
 	}
 
-	// Creating MinHeap
+	// Defining MinHeap
 	public class MinHeap
 	{
 		int[] heap;
