@@ -92,7 +92,7 @@ namespace PSIT
 			this.data = data;
 			this.left = left;
 			this.right = right;
-			this.parent = null;
+			this.parent = parent;
 		}
 
 		public int Data
