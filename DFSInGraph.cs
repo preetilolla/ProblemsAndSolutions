@@ -25,7 +25,14 @@ namespace PS
 		{
 			bool[] visited = new bool[g.Vertices];
 
-			DFSUtility(g, visited, s);
+			// To handle a disconnected graph too.
+			for (int i = 0; i < g.Vertices; i++)
+			{
+				if (!visited[i])
+				{
+					DFSUtility(g, visited, s);
+				}
+			}
 		}
 
 		public static void DFSUtility(Graph g, bool[] visited, int s)
