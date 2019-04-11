@@ -28,14 +28,14 @@ namespace PS
 			Queue<int> queue = new Queue<int>();
 			visited[s] = true;
 			queue.Enqueue(s);
-			while(queue.Count!=0)
+			while (queue.Count != 0)
 			{
 				s = queue.Dequeue();
 
 				Console.Write(" > " + s);
-				foreach(var v in g.Adj[s])
+				foreach (var v in g.Adj[s])
 				{
-					if(!visited[v])
+					if (!visited[v])
 					{
 						visited[v] = true;
 						queue.Enqueue(v);
