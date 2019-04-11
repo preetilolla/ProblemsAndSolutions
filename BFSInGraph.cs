@@ -41,21 +41,6 @@ namespace PS
 						queue.Enqueue(v);
 					}
 				}
-
-			}
-		}
-
-		public static void BFSUtility(Graph g, bool[] visited, int s)
-		{
-			visited[s] = true;
-			Console.Write(" > " + s);
-			foreach (var v in g.Adj[s])
-			{
-				int n = v;
-				if (!visited[n])
-				{
-					BFSUtility(g, visited, v);
-				}
 			}
 		}
 	}
