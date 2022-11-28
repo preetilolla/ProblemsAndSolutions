@@ -1,0 +1,39 @@
+/*
+
+Given two strings s and t, determine if they are isomorphic.
+
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving the order of characters. 
+
+No two characters may map to the same character, but a character may map to itself.
+ 
+*/
+
+public class Solution {
+    public bool IsIsomorphic(string s, string t) {
+        if(string.IsNullOrWhiteSpace(s) || string.IsNullOrWhiteSpace(t) || s.Length != t.Length) 
+        {
+            return false;
+        }
+        int[] sMapping = Enumerable.Range(0, 255).Select(n => -1).ToArray();
+        int[] tMapping = Enumerable.Range(0, 255).Select(n => -1).ToArray();
+        
+        for(int i = 0; i < s.Length; i++)
+        {
+            char c1 = s[i];
+            char c2 = t[i];
+            
+            if(sMapping[c1] == -1 && tMapping[c2] == -1)
+            {
+                sMapping[c1] = c2;
+                tMapping[c2] = c1;
+            }
+            else if(!(sMapping[c1] == c2 && tMapping[c2] == c1))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
