@@ -1,0 +1,65 @@
+/*
+Can Make Palindrome from Substring
+
+You are given a string s and array queries where queries[i] = [lefti, righti, ki]. We may rearrange the substring s[lefti...righti] for each query and then choose up to ki of them to replace with any lowercase English letter.
+
+If the substring is possible to be a palindrome string after the operations above, the result of the query is true. Otherwise, the result is false.
+
+*/
+public class Solution {
+    public IList<bool> CanMakePaliQueries(string s, int[][] queries) {
+        List <bool> result = new List<bool>();
+        for(int i = 0; i < queries.Length; i++)
+        {
+            int start = queries[i][0];
+            int end = queries[i][1];
+            int numOfSub = queries[i][2];
+            string subStr = s.Substring(start, end - start + 1);
+            if(numOfSub == 0)
+            {
+                result.Add(isPalindrome(subStr));
+            }
+            else
+            {
+                Hashtable ht = new Hashtable();
+                for(int j = 0; j < subStr.Length; j++)
+                {
+                    if(ht.ContainsKey(subStr[j]))
+                    {
+                        int value = Convert.ToInt32(ht[subStr[j]]);
+                        ht[subStr[j]] = ++value;
+                    }
+                    else
+                    {
+                        ht.Add(subStr[j], 1);
+                    }
+                }
+                int numOfKeys = 0;
+                foreach(var v in ht.Values)
+                {
+                    if(Convert.ToInt32(v) == 1)
+                    {
+                        numOfKeys++;
+                    }
+                }
+                float check = (float)(numOfKeys - 1) / 2;
+                result.Add(numOfSub >= check ? true : false);
+            }
+        }
+        return result;
+    }
+
+    bool isPalindrome(string s)
+    {
+        int j = s.Length - 1;
+        for(int i = 0; i < s.Length / 2; i++)
+        {
+            if(s[i] != s[j])
+            {
+                return false;
+            }
+            j--;
+        }
+        return true;
+    }
+}
