@@ -1,0 +1,33 @@
+/*
+Longest Substring Without Repeating Characters
+*/
+
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        if(string.IsNullOrEmpty(s))
+        {
+            return 0;
+        }
+        else if(s == " ")
+        {
+            return 1;
+        }
+        int start = 0, end = 0;
+        int maxLength = 0;
+        Dictionary<char, int> dict = new Dictionary<char, int>();
+        for(start = 0; end < s.Length; end++)
+        {
+            if(!dict.ContainsKey(s[end]))
+            {
+                dict.Add(s[end], end);
+            }
+            else
+            {
+                start = Math.Max(start, dict[s[end]] + 1);
+            }
+            dict[s[end]] = end;
+            maxLength = Math.Max(maxLength, end - start + 1);
+        }
+        return maxLength;
+    }
+}
