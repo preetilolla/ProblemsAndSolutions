@@ -1,0 +1,55 @@
+/*
+
+Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+
+The overall run time complexity should be O(log (m+n)).
+
+*/
+
+public class Solution {
+    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+         bool isEven = (nums1.Length + nums2.Length) % 2 == 0;
+        int i = 0, j = 0, counter = -1;
+        int mid = isEven ? 
+                  (nums1.Length + nums2.Length) / 2 : 
+                  (nums1.Length + nums2.Length + 1) / 2;
+        List<int> sorted = new List<int>();
+        while(counter <= mid && i < nums1.Length && j < nums2.Length)
+        {
+            if(nums1[i] < nums2[j])
+            {
+                sorted.Add(nums1[i]);
+                i++;
+            }
+            else
+            {
+                sorted.Add(nums2[j]);
+                j++;
+            }
+            counter++;
+        }
+		 if(counter < mid)
+		 {
+			 while(i < nums1.Length && counter <= mid)
+			 {
+				 sorted.Add(nums1[i]);
+				 i++;
+				 counter++;
+			 }
+			 while(j < nums2.Length && counter <= mid)
+			 {
+				 sorted.Add(nums2[j]);
+				 j++;
+				 counter++;
+			 }
+		 }
+        if(!isEven)
+        {
+            return sorted[mid - 1];
+        }
+        else
+        {
+            return ((double)sorted[mid - 1] + sorted[mid]) / 2;
+        }
+    }
+}
